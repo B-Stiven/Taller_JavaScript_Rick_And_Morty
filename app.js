@@ -1,10 +1,11 @@
 const URL="https://rickandmortyapi.com/api/character";
-const UR='https://rickandmortyapi.com/api/character/?name=';
+
 const nameC= document.getElementById("nameC");
+const car2=document.getElementById("card")
 
 
 window.addEventListener("load", getCharacters());
-nameC.addEventListener('keyup', checkCharacter());
+nameC.addEventListener('keyup', cleaner);
 
 
 
@@ -40,21 +41,24 @@ function createElements(name, img){
     return card;   
 }
 
-function checkCharacter(){
-    while(Card.lastChild){
-        Card.removeChild(Card.lastChild)
+const URLCar = "https://rickandmortyapi.com/api/character/?name=";
+function cleaner(){
+    while(car2.lastChild){
+        car2.removeChild(car2.lastChild);
     }
-    getCharactersByKeys(nameC.value);  
+    getCharacters2(nameC.value);
+
+
 }
 
-function getCharactersByKeys(searchCharacter){
-    fetch(UR+searchCharacter)
-    .then(response => response.json())
-     .then(data =>{
-        data.results.forEach(element =>{
-            createElements(element.name, element.image)
+function getCharacters2(setatrubute){
+    fetch(URLCar+setatrubute)
+    .then(response=>response.json())
+    .then(data=>{ 
+        data.results.forEach(element => {
+            createElements(element.name,element.image)
             console.log(element.name)
-                                          
-         });
-     })
-    }
+        }); 
+
+    }); 
+}
